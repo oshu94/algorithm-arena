@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Arena</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <!-- Top bar: game name, score, streak -->
+  <header class="top-bar">
+    <h1 class="logo">Algorithm <span>Arena</span></h1>
+    <div class="stats">
+      <div class="stat">Score <strong id="score">0</strong></div>
+      <div class="stat">Streak <strong id="streak">0</strong></div>
+    </div>
+  </header>
+
+  <!-- MENU SCREEN: shown first -->
+  <section id="menu-screen" class="menu-screen">
+    <div class="menu-inner">
+      <h2 class="menu-title">Pick your algorithm</h2>
+      <p class="menu-sub">Three algorithms. Zero excuses.</p>
+
+      <div class="algo-cards">
+        <button class="algo-card is-selected" data-algo="bubble" aria-pressed="true">
+          <span class="algo-name">Bubble Sort</span>
+          <span class="algo-desc">Neighbours compare, big ones drift right. Dramatic and slow.</span>
+        </button>
+        <button class="algo-card" data-algo="selection" aria-pressed="false">
+          <span class="algo-name">Selection Sort</span>
+          <span class="algo-desc">Hunt for the smallest, send it to the front. Methodical, slightly smug.</span>
+        </button>
+        <button class="algo-card" data-algo="insertion" aria-pressed="false">
+          <span class="algo-name">Insertion Sort</span>
+          <span class="algo-desc">Slide each card left until it fits. Like sorting a hand of cards, minus the poker face.</span>
+        </button>
+      </div>
+
+      <p class="menu-label">How spicy?</p>
+      <div class="size-row">
+        <button class="size-btn" data-size="4" aria-pressed="false">Chill <small>4 numbers</small></button>
+        <button class="size-btn is-selected" data-size="6" aria-pressed="true">Normal <small>6 numbers</small></button>
+        <button class="size-btn" data-size="7" aria-pressed="false">Spicy <small>7 numbers</small></button>
+      </div>
+
+      <button id="btn-start" class="btn btn-swap btn-start">Start sorting</button>
+      <p class="controls-hint"><kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> move &nbsp;·&nbsp; <kbd>Enter</kbd> select</p>
+    </div>
+  </section>
+
+  <!-- GAME SCREEN: hidden until Start is pressed -->
+  <main id="game-screen" class="game" hidden>
+
+    <section class="progress-area">
+      <p id="progress-label">Pass 1 · Step 1</p>
+      <div class="progress-track">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+    </section>
+
+    <section class="arena-card">
+      <p id="question">Get ready.</p>
+
+      <div class="tile-stage">
+        <div id="spotlight" class="spotlight"></div>
+        <div id="pointer" class="pointer"></div>
+        <div id="tile-row" class="tile-row"></div>
+      </div>
+
+      <div class="actions">
+        <button id="btn-swap" class="btn btn-swap">Swap</button>
+        <button id="btn-keep" class="btn btn-keep">Keep</button>
+      </div>
+
+      <p id="feedback" class="feedback" aria-live="polite">Pick one. No pressure. Okay, a little pressure.</p>
+      <p class="controls-hint"><kbd>←</kbd> <kbd>→</kbd> choose &nbsp;·&nbsp; <kbd>Enter</kbd> select &nbsp;·&nbsp; <kbd>Esc</kbd> menu</p>
+    </section>
+
+  </main>
+
+  <!-- FINISH SCREEN: hidden until the array is sorted -->
+  <section id="finish-screen" class="finish-screen" hidden>
+    <h2>Sorted!</h2>
+    <p id="finish-message"></p>
+    <div class="finish-actions">
+      <button id="btn-replay" class="btn btn-swap">Play again</button>
+      <button id="btn-menu" class="btn btn-keep">Menu</button>
+    </div>
+  </section>
+
+</body>
+</html>
