@@ -16,9 +16,12 @@ Open `index.html` in any modern browser. No install, no dependencies.
 Plain HTML, CSS and vanilla JavaScript.
 
 ## Status (honest version)
-- Works: full Bubble Sort game, scoring, streaks, replay, keyboard and mouse input.
-- Tested: desktop browser on Windows, keyboard and mouse.
-- NOT tested: Fire TV, Fire OS, or any emulator. This is not a packaged Fire TV app.
+
+- **Works:** Bubble Sort game, scoring, streaks, replay, keyboard and mouse input.
+- **Tested:** Desktop browser on Windows, using keyboard and mouse.
+- **Also tested:** Website opened in an Android TV 1080p emulator using a TV browser. Verified sorting modes, scoring, streaks, replay, and TV-screen layout.
+- **Not tested:** On a physical Amazon Fire TV device or confirmed Fire OS environment.
+- **App format:** This is a web application hosted on GitHub Pages, not a packaged native Fire TV app.
 
 ## License
 MIT
