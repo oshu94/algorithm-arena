@@ -55,7 +55,7 @@ You can run Algorithm Arena directly in a modern web browser.
 
 I contacted Amazon Developer Support to seek clarification about the Fire TV testing requirements and the applicable developer agreement. I did not receive a response before the submission deadline, and I did not accept the agreement for access to the restricted testing environment.
 
-As a result, I could not verify the application on a physical Amazon Fire TV device or a confirmed Fire OS environment. Android TV emulator testing should not be considered equivalent to Fire TV testing.
+As a result, I could not verify the application on a physical Amazon Fire TV device or a confirmed Fire OS environment. Testing was performed using an Android TV emulator. Compatibility with Amazon Fire TV has not been verified.
 
 The project source code and live demo are available for review through this repository and GitHub Pages.
 
