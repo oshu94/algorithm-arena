@@ -46,11 +46,18 @@ You can run Algorithm Arena directly in a modern web browser.
 
 ## Testing and Current Status
 
-- **Working features:** Sorting gameplay, scoring, streak tracking, replay, and keyboard and mouse controls.
 - **Desktop testing:** Tested in a Windows desktop browser using a keyboard and mouse.
-- **Android TV emulator testing:** Opened the website in an Android TV 1080p emulator through a TV browser. Checked the sorting modes, scoring, streaks, replay, and layout on a TV-sized screen.
+- **Android TV emulator testing:** Opened the website in an Android TV 1080p emulator through a TV browser. Tested the sorting modes, scoring, streaks, replay, and layout on a TV-sized screen.
 - **Fire TV compatibility:** Not verified on a physical Amazon Fire TV device or a confirmed Fire OS environment.
 - **Application format:** A browser-based web application hosted on GitHub Pages. It is not currently packaged as a native Fire TV application.
+
+### Fire TV Testing and Compatibility
+
+I contacted Amazon Developer Support to seek clarification about the Fire TV testing requirements and the applicable developer agreement. I did not receive a response before the submission deadline, and I did not accept the agreement for access to the restricted testing environment.
+
+As a result, I could not verify the application on a physical Amazon Fire TV device or a confirmed Fire OS environment. Android TV emulator testing should not be considered equivalent to Fire TV testing.
+
+The project source code and live demo are available for review through this repository and GitHub Pages.
 
 ## What I Learned
 
