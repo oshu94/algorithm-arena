@@ -294,6 +294,33 @@ let correctCount = 0;
 let isLocked = false;             // true while a step is animating
 let pendingTimer = null;          // the waiting setTimeout, so we can cancel it
 
+let lastGameFinished = false;     // true after a game ends normally (menu keeps the score)
+
+// Best scores, saved in the browser. Key looks like "bubble-6".
+let bestScores = {};
+try {
+  bestScores = JSON.parse(localStorage.getItem("arenaBest") || "{}");
+} catch (e) {
+  bestScores = {};
+}
+
+function saveBest() {
+  try {
+    localStorage.setItem("arenaBest", JSON.stringify(bestScores));
+  } catch (e) {
+    // storage not available: the best scores just won't survive a refresh
+  }
+}
+
+// Show "Best: 1200" on each algorithm card for the currently selected size
+function refreshBestLabels() {
+  algoCards.forEach((card) => {
+    const label = card.querySelector(".algo-best");
+    const best = bestScores[card.dataset.algo + "-" + selectedSize];
+    label.textContent = best ? "Best: " + best : "No score yet";
+  });
+}
+
 // ---------- Small helpers ----------
 function pickRandom(list) {
   return list[Math.floor(Math.random() * list.length)];
@@ -464,6 +491,15 @@ function finishGame() {
     console.error("BUG: final array is not sorted!", finalArray);
   }
 
+  // Remember the result so the menu can show it
+  lastGameFinished = true;
+  const key = selectedAlgo + "-" + selectedSize;
+  const isNewBest = score > (bestScores[key] || 0);
+  if (isNewBest) {
+    bestScores[key] = score;
+    saveBest();
+  }
+
   renderTiles(finalArray, {
     compared: [],
     minIndex: -1,
@@ -477,7 +513,8 @@ function finishGame() {
   finishMessage.textContent =
     mode.name + " done. Final array: " + finalArray.join(" ") + ". " +
     correctCount + "/" + steps.length + " correct · Score " + score +
-    " · Best streak " + bestStreak + ". " + verdict(correctCount, steps.length, mode.name);
+    " · Best streak " + bestStreak + ". " + verdict(correctCount, steps.length, mode.name) +
+    (isNewBest ? " New best score!" : "");
 
   pendingTimer = setTimeout(() => {
     finishScreen.hidden = false;
@@ -487,6 +524,7 @@ function finishGame() {
 
 function startGame() {
   clearTimeout(pendingTimer);
+  lastGameFinished = false;
 
   const mode = MODES[selectedAlgo];
   const built = mode.build(makeRandomArray(selectedSize));
@@ -517,9 +555,13 @@ function startGame() {
 function showMenu() {
   clearTimeout(pendingTimer);     // cancel any step that was about to happen
   isLocked = true;
-  score = 0;
-  streak = 0;
+
+  if (!lastGameFinished) {        // quit mid-game: wipe the unfinished score
+    score = 0;
+    streak = 0;
+  }
   updateStats();
+  refreshBestLabels();
 
   gameScreen.hidden = true;
   finishScreen.hidden = true;
@@ -542,6 +584,7 @@ function chooseSize(button) {
     b.classList.toggle("is-selected", b === button);
     b.setAttribute("aria-pressed", b === button);
   });
+  refreshBestLabels();            // best scores depend on the size
 }
 
 // The menu is a grid: row 0 = algorithm cards, row 1 = sizes, row 2 = Start
@@ -634,6 +677,13 @@ document.addEventListener("keydown", (event) => {
     btnKeep.focus();
     event.preventDefault();
   }
+});
+
+// Add a "Best: ..." line to each algorithm card
+algoCards.forEach((card) => {
+  const best = document.createElement("span");
+  best.className = "algo-best";
+  card.appendChild(best);
 });
 
 showMenu();     // the game opens on the menu

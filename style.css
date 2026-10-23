@@ -458,3 +458,11 @@ kbd {
   .btn { font-size: 1.8rem; min-width: 220px; }
   .feedback { font-size: 1.4rem; max-width: 760px; }
 }
+
+/* ===== 14. Best score label ===== */
+.algo-best {
+  margin-top: 4px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  opacity: 0.9;
+}
